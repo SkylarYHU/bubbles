@@ -1,0 +1,109 @@
+{% extends "main/base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<style>
+  /* Container for posts */
+  .post-container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 0 15px;
+  }
+
+  /* Post card styling */
+  .post-card {
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+      border: 1px solid #eaeaea;
+  }
+
+  .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Post header */
+  .post-header {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-bottom: 1px solid #eaeaea;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .post-author {
+      font-weight: bold;
+      color: #333;
+  }
+
+  .post-date {
+      color: #aaa;
+      font-size: 12px;
+  }
+
+  /* Post title */
+  .post-title {
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #444;
+      margin: 0;
+      border-bottom: 1px solid #eaeaea;
+  }
+
+  /* Post description */
+  .post-description {
+      padding: 15px;
+      color: #555;
+      line-height: 1.5;
+  }
+
+  /* Post footer */
+  .post-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border-top: 1px solid #eaeaea;
+      background-color: #f9f9f9;
+  }
+
+  /* No posts message */
+  .no-posts {
+      text-align: center;
+      color: #aaa;
+      font-size: 16px;
+      margin: 20px 0;
+  }
+</style>
+
+<div class="post-container">
+  {% for post in posts %}
+  <div class="post-card">
+    <div class="post-header">
+      <span class="post-author">@{{ post.author.username }}</span>
+      <span class="post-date">{{ post.created_at|date:"F j, Y" }}</span>
+    </div>
+    <h3 class="post-title">{{ post.title }}</h3>
+    <p class="post-description">{{ post.description }}</p>
+    <div class="post-footer">
+      <span class="post-date">{{ post.created_at|date:"M d, Y" }}</span>
+      {% if user == post.author %}
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" name="post-id" value="{{ post.id }}">Delete</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <p class="no-posts">No posts yet...</p>
+  {% endfor %}
+</div>
+{% endblock %}

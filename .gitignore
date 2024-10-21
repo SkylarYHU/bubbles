@@ -1,0 +1,39 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+/staticfiles/
+media/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Misc
+*.DS_Store
+*.egg-info/
+*.egg
+*.orig
+*.bak
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Python environment variables
+*.env

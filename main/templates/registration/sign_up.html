@@ -1,0 +1,80 @@
+{% extends "main/base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+  /* Center the form on the page */
+  .login-form {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Style form inputs */
+  .login-form input[type="text"],
+  .login-form input[type="password"],
+  .login-form input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+  }
+
+  /* Style the submit button */
+  .login-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  }
+
+  .login-form button:hover {
+      background-color: #218838;
+  }
+
+  /* Style the link */
+  .login-form a {
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+  }
+
+  .login-form a:hover {
+      color: #0056b3;
+  }
+
+  /* Style the error message */
+  .login-form .errorlist {
+      color: red;
+      font-size: 12px;
+      list-style-type: none;
+      padding: 0;
+  }
+
+  /* Add some padding to the bottom text */
+  .login-form p {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+  }
+</style>
+
+<div class="login-form">
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <p>Have an account? Login <a href="/login">here</a></p> 
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+</div>
+{% endblock %}
